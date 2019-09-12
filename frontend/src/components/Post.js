@@ -5,6 +5,9 @@ class Post extends Component {
   render() {
     return (
       <div>
+        <header>
+          <p>Post</p>
+        </header>
         <Comment />
       </div>
     )
