@@ -1,0 +1,17 @@
+import { RECEIVE_CATEGORIES, ADD_CATEGORIES } from '../actions/categories'
+
+export default function categories(state={}, action) {
+    switch(action.type) {
+      case RECEIVE_CATEGORIES:
+        return {
+          ...state,
+          ...action.categories
+        }
+        case ADD_CATEGORIES:
+        return {
+          ...state,
+          ...action.category,
+        }
+        default: return state
+    }
+}

@@ -5,6 +5,9 @@ class Home extends Component {
   render() {
     return (
       <div>
+      <button>
+        filter btn
+      </button>
         <Category />
       </div>
     )
