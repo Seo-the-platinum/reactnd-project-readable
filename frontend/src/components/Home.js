@@ -3,20 +3,20 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 class Home extends Component {
+
   render() {
-  console.log(this.props.categories)
+    console.log(Object.keys(this.props.categories).length)
     return (
       <div>
       <button>
         filter btn
       </button>
-
       </div>
     )
   }
 }
 
-function mapStateToProps({ categories}) {
+function mapStateToProps({ categories }) {
   return {
     categories,
   }

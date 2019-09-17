@@ -8,22 +8,30 @@ import handleInitialData from './actions/shared'
 import { connect } from 'react-redux'
 
 class App extends Component {
-  
+
+ state= {
+   loading: true,
+ }
   componentDidMount() {
     this.props.dispatch(handleInitialData())
+    .then(()=> {
+      this.setState((currState)=> ({
+        loading: false,
+      }))
+    })
   }
 
   render() {
 
     return (
-
+      
         <div>
-          <Home />
-
+          {this.state.loading === false ? <Home /> : null}
         </div>
 
     )
   }
 }
+
 
 export default connect()(App);
