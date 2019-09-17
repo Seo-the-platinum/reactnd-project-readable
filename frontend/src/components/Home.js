@@ -1,16 +1,26 @@
 import React, { Component } from 'react'
-//import Category from './Category'
+import Category from './Category'
 import { connect } from 'react-redux'
 
 class Home extends Component {
 
   render() {
-    console.log(Object.keys(this.props.categories).length)
+    const { categories } = this.props
     return (
       <div>
       <button>
         filter btn
       </button>
+      { Object.keys(categories).map((category)=> {
+        return(
+          <Category
+            key={categories[category].name}
+            name={categories[category].name}
+            path={categories[category].path}
+          />
+        )
+      })
+     }
       </div>
     )
   }
