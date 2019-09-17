@@ -1,17 +1,24 @@
 import React, { Component } from 'react'
-import Category from './Category'
+//import Category from './Category'
+import { connect } from 'react-redux'
 
 class Home extends Component {
   render() {
+  console.log(this.props.categories)
     return (
       <div>
       <button>
         filter btn
       </button>
-        <Category />
+
       </div>
     )
   }
 }
 
-export default Home
+function mapStateToProps({ categories}) {
+  return {
+    categories,
+  }
+}
+export default connect(mapStateToProps)(Home)
