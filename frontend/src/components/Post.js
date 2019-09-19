@@ -1,19 +1,16 @@
 import React, { Component } from 'react'
-import Comment from './Comment'
 import { connect } from 'react-redux'
 
 class Post extends Component {
-
   render() {
 
     const { posts, data }= this.props
-
-    return (
+    console.log(posts, data)
+      return (
       <div>
-        <header>
-          { posts[data].title}
-        </header>
-        <Comment />
+        <p>
+          { data.title}
+        </p>
       </div>
     )
   }

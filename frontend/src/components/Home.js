@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Category from './Category'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 class Home extends Component {
 
@@ -8,9 +9,11 @@ class Home extends Component {
     const { categories } = this.props
     return (
       <div>
+      <Link to={'/add'}>
       <button>
-        filter btn
+        Add Post
       </button>
+      </Link>
       { Object.keys(categories).map((category)=> {
         return(
           <Category

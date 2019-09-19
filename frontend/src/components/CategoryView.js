@@ -1,14 +1,55 @@
 import React, { Component } from 'react'
-import Category from './Category'
+import { connect } from 'react-redux'
+import Post from './Post'
+import { Link } from 'react-router-dom'
 
 class CategoryView extends Component {
   render() {
+    const { path, categories, posts }= this.props
+
+
+    const postIndexes= Object.keys(posts).filter((p)=> {
+      console.log(posts[p].category)
+      return (
+        posts[p].category === path
+      )
+    })
+
     return (
       <div>
-        <Category />
+        <header>
+          { path }
+        </header>
+        <button>
+          Filter Posts
+        </button>
+        <div>
+          { postIndexes.map((index)=> {
+            const postId= posts[index].id
+             return (
+               <div>
+                <Post key={postId} data={posts[index]}/>
+                <Link to={{
+                  pathname: `/postview/${posts[index].id}`,
+                  state: { index: index}}
+                  }>
+                <button>View Post</button>
+                </Link>
+               </div>
+             )
+           })}
+        </div>
       </div>
     )
   }
 }
-
-export default CategoryView
+function mapStateToProps({ categories, posts }, props) {
+  const { path }= props.match.params
+  console.log(path)
+  return {
+    path,
+    categories,
+    posts,
+  }
+}
+export default connect(mapStateToProps)(CategoryView)

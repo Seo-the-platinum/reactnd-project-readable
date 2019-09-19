@@ -4,7 +4,39 @@ class AddorCreate extends Component {
   render() {
     return (
       <div>
-        <p>add or create code here</p>
+        <header>
+        Add Post
+        </header>
+        <form>
+          <label>
+           Choose your category
+            <select>
+              <option value='react'>React</option>
+              <option value='redux'>Redux</option>
+              <option value='udacity'>udacity</option>
+            </select>
+          </label>
+          <label>
+          Post title
+          <input
+            type='text'
+            placeholder='Post title'
+          />
+          </label>
+          <label>
+            Post body
+            <input
+              type='text'
+              placeholder='body...'
+            />
+          </label>
+          <label>
+            <input
+              type='submit'
+              value='submit'
+            />
+          </label>
+        </form>
       </div>
     )
   }

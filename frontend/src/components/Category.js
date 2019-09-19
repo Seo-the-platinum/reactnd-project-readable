@@ -5,10 +5,11 @@ import { connect } from 'react-redux'
 
 class Category extends Component {
 
+
   render() {
 
     const { name, posts }= this.props
-    console.log(name)
+
     const postIndexes= Object.keys(posts).filter((p)=> {
       console.log(posts[p].category)
       return (
@@ -16,19 +17,33 @@ class Category extends Component {
       )
     })
 
+    const indexesByScore= postIndexes.sort(function(a,b) {
+      return a.voteScore -b.voteScore
+    })
+
+    const indexesByTime= postIndexes.sort(function(a,b) {
+      return a.timestamp -b.timestamp
+    })
+
     return (
       <div>
         <header>
           { name }
         </header>
+        <button>
+          Filter Posts
+        </button>
         <div>
           { postIndexes.map((index)=> {
-             return <Post data={posts[index]} />
+            const postId= posts[index].id
+             return <Post key={postId} data={posts[index]} />
           })}
         </div>
-        <button onClick={this.handleClick}>
-        View Category
-        </button>
+        <Link to={`/categoryview/${this.props.path}`}>
+          <button>
+            View Category
+          </button>
+        </Link>
       </div>
     )
   }

@@ -1,14 +1,29 @@
 import React, { Component } from 'react'
-import Post from './Post'
+import { connect } from 'react-redux'
 
 class PostView extends Component {
   render() {
+    const { posts, pid, index }= this.props
+
+    console.log(index)
     return (
       <div >
-        <Post />
+      <header>
+        {posts[index].title}
+      </header>
+      <p>{posts[index].body}</p>
       </div>
     )
   }
 }
 
-export default PostView
+function mapStateToProps({ posts }, props) {
+  const { pid }= props.match.params
+  const { index }= props.location.state
+  return {
+    index,
+    pid,
+    posts,
+  }
+}
+export default connect(mapStateToProps)(PostView)
