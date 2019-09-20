@@ -27,7 +27,7 @@ class CategoryView extends Component {
           { postIndexes.map((index)=> {
             const postId= posts[index].id
              return (
-               <div>
+               <div key={postId}>
                 <Post key={postId} data={posts[index]}/>
                 <Link to={{
                   pathname: `/postview/${posts[index].id}`,

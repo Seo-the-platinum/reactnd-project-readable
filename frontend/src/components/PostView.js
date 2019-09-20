@@ -1,29 +1,47 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import Comment from './Comment'
 
 class PostView extends Component {
   render() {
-    const { posts, pid, index }= this.props
+    const { posts, pid, index, comments }= this.props
 
-    console.log(index)
+    const postComments= Object.keys(comments).filter(c=> {
+      return (
+        comments[c].parentId === pid
+      )
+    })
     return (
       <div >
       <header>
+        <h2>
         {posts[index].title}
+        </h2>
       </header>
+      <h3> Author: {posts[index].author}</h3>
+      <h3> Date: { posts[index].timestamp}</h3>
       <p>{posts[index].body}</p>
+      <div>
+        { postComments.map(comment=> {
+          return <Comment
+            key={ comments[comment].id }
+            id={ comments[comment].id}
+        />
+        })}
+      </div>
       </div>
     )
   }
 }
 
-function mapStateToProps({ posts }, props) {
+function mapStateToProps({ posts, comments }, props) {
   const { pid }= props.match.params
   const { index }= props.location.state
   return {
     index,
     pid,
     posts,
+    comments,
   }
 }
 export default connect(mapStateToProps)(PostView)
