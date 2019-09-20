@@ -17,6 +17,9 @@ class PostView extends Component {
         <h2>
         {posts[index].title}
         </h2>
+        <h3>
+        Score: {posts[index].voteScore}
+        </h3>
       </header>
       <h3> Author: {posts[index].author}</h3>
       <h3> Date: { posts[index].timestamp}</h3>
