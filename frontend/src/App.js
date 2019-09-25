@@ -4,6 +4,7 @@ import Home from './components/Home'
 import CategoryView from './components/CategoryView'
 import PostView from './components/PostView'
 import AddorCreate from './components/AddorCreate'
+import AddComment from './components/AddComment'
 import handleInitialData from './actions/shared'
 import { connect } from 'react-redux'
 
@@ -29,7 +30,8 @@ class App extends Component {
           <Route path='/' exact component={ Home } />
           <Route path='/categoryview/:path' component={ CategoryView } />
           <Route path='/postview/:pid' component={ PostView } />
-          <Route path='/add' component={ AddorCreate } />
+          <Route path='/add/:pathname' component={ AddorCreate } />
+          <Route path='/addcomment/:pid' component={ AddComment } />
         </div>
       </Router>
     )

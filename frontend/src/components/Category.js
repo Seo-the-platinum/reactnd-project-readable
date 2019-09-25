@@ -44,6 +44,11 @@ class Category extends Component {
             View Category
           </button>
         </Link>
+        <Link to={`/add/${ name }`}>
+        <button>
+          Add Post
+        </button>
+        </Link>
       </div>
     )
   }

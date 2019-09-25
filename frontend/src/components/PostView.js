@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Comment from './Comment'
+import { Link } from 'react-router-dom'
 
 class PostView extends Component {
   render() {
@@ -20,6 +21,15 @@ class PostView extends Component {
         <h3>
         Score: {posts[index].voteScore}
         </h3>
+        <Link to={{
+           pathname: `/addcomment/${ pid }`,
+           state: {index: index},
+         }}
+          >
+        <button>
+          Add Comment
+        </button>
+        </Link>
       </header>
       <h3> Author: {posts[index].author}</h3>
       <h3> Date: { posts[index].timestamp}</h3>

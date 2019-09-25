@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 
 class CategoryView extends Component {
   render() {
-    const { path, categories, posts }= this.props
+    const { path, posts }= this.props
 
 
     const postIndexes= Object.keys(posts).filter((p)=> {
