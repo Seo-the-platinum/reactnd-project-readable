@@ -31,15 +31,52 @@ class AddorCreate extends Component {
       author: text,
     }))
   }
+
+  generateId=(num)=> {
+    let string= ''
+    const char_list= 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+    for(let i=0; i < num; i++ ) {
+      string += char_list.charAt(Math.floor(Math.random() * char_list.length))
+    }
+    return this.setState((currState)=>({
+      ...currState,
+      id: string,
+    }))
+  }
+
+  generateTimeStamp=()=> {
+    this.setState((currState)=> ({
+      ...currState,
+      timestamp: Date.now()
+    }))
+  }
+
+ setCategory=()=> {
+   this.setState((currState)=> ({
+     ...currState,
+     category: this.props.pathname,
+   }))
+ }
+
+  handleSubmit=(e)=> {
+    Promise.all([this.generateId(20), this.generateTimeStamp(),this.setCategory()])
+    .then(()=> {const post= this.state
+      console.log(post)
+    })
+    e.preventDefault()
+
+  }
+
   render() {
     const { pathname }= this.props
-    const { title, body }= this.state
+    const { title, body, author }= this.state
+
     return (
       <div>
         <header>
         Add post to { pathname } category
         </header>
-        <form>
+        <form onSubmit={ (e)=> this.handleSubmit(e) }>
           <label>
           Post title
           <input
@@ -56,6 +93,15 @@ class AddorCreate extends Component {
               placeholder='body...'
               value={ body }
               onChange={ (e)=> this.handleChangeBody(e) }
+            />
+          </label>
+          <label>
+            Author
+            <input
+              type='text'
+              placeholder='Author'
+              value={ author }
+              onChange={ (e)=> this.handleChangeAuthor(e) }
             />
           </label>
           <label>
