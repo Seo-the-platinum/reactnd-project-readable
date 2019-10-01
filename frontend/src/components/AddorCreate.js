@@ -1,34 +1,48 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { handleAddPost } from '../actions/posts'
+import { Redirect } from 'react-router-dom'
 
 class AddorCreate extends Component {
   state= {
+    p: {
       id: '',
       title:'',
       body:'',
       timestamp: null,
       author:'',
       category:'',
+    },
+    redirect: false,
   }
 
   handleChangeTitle=(e)=> {
     const text= e.target.value
     this.setState((currState)=> ({
+      p: {
+      ...currState.p,
       title: text,
+    }
     }))
   }
 
   handleChangeBody=(e)=> {
     const text= e.target.value
     this.setState((currState)=> ({
+      p: {
+      ...currState.p,
       body: text,
+    }
     }))
   }
 
   handleChangeAuthor=(e)=> {
     const text= e.target.value
     this.setState((currState)=> ({
+      p: {
+      ...currState.p,
       author: text,
+    }
     }))
   }
 
@@ -39,38 +53,54 @@ class AddorCreate extends Component {
       string += char_list.charAt(Math.floor(Math.random() * char_list.length))
     }
     return this.setState((currState)=>({
-      ...currState,
+      p: {
+      ...currState.p,
       id: string,
+    }
     }))
   }
 
   generateTimeStamp=()=> {
     this.setState((currState)=> ({
-      ...currState,
+      p: {
+      ...currState.p,
       timestamp: Date.now()
+    }
     }))
   }
 
  setCategory=()=> {
    this.setState((currState)=> ({
-     ...currState,
+     p: {
+     ...currState.p,
      category: this.props.pathname,
+   }
    }))
  }
 
   handleSubmit=(e)=> {
-    Promise.all([this.generateId(20), this.generateTimeStamp(),this.setCategory()])
-    .then(()=> {const post= this.state
-      console.log(post)
-    })
     e.preventDefault()
+    Promise.all([this.generateId(20), this.generateTimeStamp(),this.setCategory()])
+    .then(()=> { const post= this.state.p
+      this.props.dispatch(handleAddPost({post}))
+    })
+    .then(()=> {
+      this.setState(currState=> ({
+        currState,
+        redirect: true,
+      }))
+    })
 
   }
 
   render() {
     const { pathname }= this.props
-    const { title, body, author }= this.state
+    const { redirect }= this.state
+    const { title, body, author }= this.state.p
 
+    if (redirect) {
+      return <Redirect to='/'/>
+    }
     return (
       <div>
         <header>

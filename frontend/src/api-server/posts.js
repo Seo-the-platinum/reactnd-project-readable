@@ -129,12 +129,13 @@ function incrementCommentCounter(token, id, count) {
 
 module.exports = {
   get,
+  getData,
   getAll,
   getByCategory,
   add,
   vote,
   disable,
   edit,
-  
+
   incrementCommentCounter
 }

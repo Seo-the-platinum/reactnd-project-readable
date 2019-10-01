@@ -1,7 +1,6 @@
 import { RECEIVE_CATEGORIES, ADD_CATEGORIES } from '../actions/categories'
 
 export default function categories(state={}, action) {
-  console.log(action.categories)
     switch(action.type) {
       case RECEIVE_CATEGORIES:
         return {

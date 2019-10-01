@@ -8,7 +8,7 @@ const commentsModule= require('../api-server/comments')
 
 export default function handleInitialData() {
   return (dispatch)=> {
-    return Promise.all([categoriesModule.getAll(), postsModule.getAll(),commentsModule.getData()])
+    return Promise.all([categoriesModule.getAll(), postsModule.getData(),commentsModule.getData()])
     .then((values)=> {
       dispatch(receiveCategories(values[0]))
       dispatch(receivePosts(values[1]))
