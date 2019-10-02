@@ -6,7 +6,8 @@ import { Link } from 'react-router-dom'
 class PostView extends Component {
   render() {
     const { posts, pid, index, comments }= this.props
-
+    const time= posts[index].timestamp
+    const date= new Date(time)
     const postComments= Object.keys(comments).filter(c=> {
       return (
         comments[c].parentId === pid
@@ -32,7 +33,7 @@ class PostView extends Component {
         </Link>
       </header>
       <h3> Author: {posts[index].author}</h3>
-      <h3> Date: { posts[index].timestamp}</h3>
+      <h3> Date: { `${date}` }</h3>
       <p>{posts[index].body}</p>
       <div>
         { postComments.map(comment=> {
