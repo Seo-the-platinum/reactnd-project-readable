@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
+import { handleAddComment } from '../actions/comments'
 
 
 class AddComment extends Component {
@@ -55,17 +56,44 @@ class AddComment extends Component {
       }
     }))
   }
+  getParentId=()=> {
+    this.setState(currState=> ({
+      comment: {
+        ...currState.comment,
+        parentId: this.props.pid
+      }
+    }))
+  }
+
+  handleSubmit=(e)=> {
+    e.preventDefault()
+
+    Promise.all([this.generateId(20), this.generateTimeStamp(), this.getParentId()])
+    .then(()=> { const comment= this.state.comment
+      this.props.dispatch(handleAddComment({comment}))
+    })
+    .then(()=> {
+      this.setState(currState=> ({
+        currState,
+        redirect: true,
+      }))
+    })
+  }
 
 
 
   render() {
     const { posts, pid }= this.props
     const { body, author }= this.state.comment
-    console.log(pid)
+    const { redirect }= this.state
+
+    if (redirect) {
+      return <Redirect to='/'/>
+    }
     return (
       <div>
       { posts[pid].title }
-        <form>
+        <form  onSubmit={ (e)=>this.handleSubmit(e) }>
           <label>
           Comment Body
             <input
@@ -82,6 +110,12 @@ class AddComment extends Component {
               placeholder='comment'
               value={ author }
               onChange={(e)=> this.handleChangeAuthor(e)}
+            />
+          </label>
+          <label>
+            <input
+              type='submit'
+              value='submit'
             />
           </label>
         </form>
