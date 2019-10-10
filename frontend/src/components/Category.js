@@ -4,40 +4,62 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 class Category extends Component {
+  state= {
+    byScore:true,
+
+  }
+
+  toggle=()=> {
+    if( this.state.byScore) {
+    this.setState(currState=> ({
+      currState,
+      byScore: false,
+    }))
+  } else {
+    this.setState(currState=> ({
+      currState,
+      byScore: true,
+    }))
+  }
+  }
 
 
   render() {
 
     const { name, posts }= this.props
+    const { byScore }= this.state
 
     const postIndexes= Object.keys(posts).filter((p)=> {
-      console.log(posts[p].category)
       return (
         posts[p].category === name
       )
     })
 
-    const indexesByScore= postIndexes.sort(function(a,b) {
-      return a.voteScore -b.voteScore
-    })
-
-    const indexesByTime= postIndexes.sort(function(a,b) {
-      return a.timestamp -b.timestamp
-    })
+  
 
     return (
       <div>
         <header>
           { name }
         </header>
-        <button>
-          Filter Posts
+        <button onClick={ this.toggle }>
+        { byScore ? 'Filter by Time' : 'Filter by Score' }
         </button>
+
         <div>
-          { postIndexes.map((index)=> {
-            const postId= posts[index].id
-             return <Post key={postId} data={posts[index]} />
-          })}
+          { byScore ?
+            postIndexes.sort(function(a,b) {
+              return posts[b].voteScore -posts[a].voteScore
+            }).map((index)=> {
+              const postId= posts[index].id
+                return <Post key={ postId } data={ posts[index] } />
+            })  :
+            postIndexes.sort(function(a,b) {
+              return posts[b].timestamp -posts[a].timestamp
+            }).map((index)=> {
+                const postId= posts[index].id
+                return <Post key={ postId } data={ posts[index]} />
+            })}
         </div>
         <Link to={`/categoryview/${this.props.path}`}>
           <button>

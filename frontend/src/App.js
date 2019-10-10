@@ -5,6 +5,8 @@ import CategoryView from './components/CategoryView'
 import PostView from './components/PostView'
 import AddorCreate from './components/AddorCreate'
 import AddComment from './components/AddComment'
+import EditPost from './components/EditPost'
+import EditComment from './components/EditComment'
 import handleInitialData from './actions/shared'
 import { connect } from 'react-redux'
 
@@ -32,6 +34,8 @@ class App extends Component {
           <Route path='/postview/:pid' component={ PostView } />
           <Route path='/add/:pathname' component={ AddorCreate } />
           <Route path='/addcomment/:pid' component={ AddComment } />
+          <Route path='/edit/:pid' component={ EditPost }/>
+          <Route path='/editcomment/:cid' component={ EditComment } />
         </div>
       </Router>
     )

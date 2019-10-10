@@ -1,8 +1,9 @@
 export const RECEIVE_POSTS = 'RECEIVE_POSTS'
 export const ADD_POST = 'ADD_POST'
+export const EDIT_POST= 'EDIT_POST'
 
 const postsModule= require('../api-server/posts')
-const { add }= postsModule
+const { add, edit }= postsModule
 
 export function receivePosts(posts) {
   return {
@@ -18,11 +19,27 @@ function addPost(post) {
   }
 }
 
+function editPost(post) {
+  return{
+    type: EDIT_POST,
+    post,
+  }
+}
+
 export function handleAddPost({post}) {
   return dispatch => {
     return add(undefined,post)
     .then(post=> {
     dispatch(addPost(post))
+    })
+  }
+}
+
+export function handleEditPost({post}) {
+  return dispatch => {
+    return edit(undefined, post.id, post)
+    .then(post=> {
+      dispatch(editPost(post))
     })
   }
 }

@@ -118,7 +118,7 @@ class AddorCreate extends Component {
           </label>
           <label>
             Post body
-            <input
+            <textarea
               type='text'
               placeholder='body...'
               value={ body }

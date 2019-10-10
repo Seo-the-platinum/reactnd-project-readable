@@ -96,7 +96,7 @@ class AddComment extends Component {
         <form  onSubmit={ (e)=>this.handleSubmit(e) }>
           <label>
           Comment Body
-            <input
+            <textarea
               type='text'
               placeholder='comment'
               value={ body }

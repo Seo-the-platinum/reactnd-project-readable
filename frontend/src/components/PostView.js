@@ -31,6 +31,11 @@ class PostView extends Component {
           Add Comment
         </button>
         </Link>
+        <Link to={`/edit/${ pid }`}>
+          <button>
+            Edit Post
+          </button>
+        </Link>
       </header>
       <h3> Author: {posts[index].author}</h3>
       <h3> Date: { `${date}` }</h3>
