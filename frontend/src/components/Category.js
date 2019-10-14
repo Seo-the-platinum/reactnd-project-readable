@@ -31,11 +31,11 @@ class Category extends Component {
 
     const postIndexes= Object.keys(posts).filter((p)=> {
       return (
-        posts[p].category === name
+        posts[p].category === name && posts[p].deleted !== true
       )
     })
 
-  
+
 
     return (
       <div>

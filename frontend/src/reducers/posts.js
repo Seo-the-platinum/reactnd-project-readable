@@ -1,4 +1,4 @@
-import { RECEIVE_POSTS, ADD_POST, EDIT_POST } from '../actions/posts'
+import { RECEIVE_POSTS, ADD_POST, EDIT_POST, DELETE_POST } from '../actions/posts'
 
 export default function posts(state={}, action) {
   switch(action.type) {
@@ -16,6 +16,7 @@ export default function posts(state={}, action) {
         ...state,
         [action.post.id]: action.post,
       }
+    
     default:
     return state
   }

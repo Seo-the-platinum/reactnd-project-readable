@@ -35,7 +35,7 @@ class App extends Component {
           <Route path='/add/:pathname' component={ AddorCreate } />
           <Route path='/addcomment/:pid' component={ AddComment } />
           <Route path='/edit/:pid' component={ EditPost }/>
-          <Route path='/editcomment/:cid' component={ EditComment } />
+          <Route path='/editcomment/:id' component={ EditComment } />
         </div>
       </Router>
     )

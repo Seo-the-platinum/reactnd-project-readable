@@ -10,24 +10,71 @@ class EditComment extends Component {
   }
 
   componentDidMount() {
-    const { comments, cid }= this.props
+    const { comments, id }= this.props
     this.setState(currState=> ({
       currState,
-      comment: comments[cid]
+      comment: comments[id]
     }))
   }
+
+  handleChange=(e)=> {
+   const text= e.target.value
+
+   this.setState(currState => ({
+     comment: {
+     ...currState.comment,
+     body: text,
+     }
+   }))
+  }
+
+  handleSubmit= (e)=> {
+    e.preventDefault()
+    const { dispatch }= this.props
+    const { comment }= this.state
+
+    dispatch(handleEditComment({ comment }))
+    .then(()=> {
+      this.setState(currState=> ({
+        redirect: true,
+      }))
+    })
+  }
+
   render() {
+    const { body }= this.state.comment
+
+    if(this.state.redirect) {
+      return <Redirect to='/'/>
+    }
     return (
-      <div></div>
+      <div>
+        <form onSubmit={(e)=> this.handleSubmit(e)}>
+          <label>
+            Body
+            <textarea
+              value={ body }
+              onChange={ (e)=> this.handleChange(e)}
+            />
+          </label>
+          <label>
+          Submit
+            <input
+              type='submit'
+              value='submit'
+            />
+          </label>
+        </form>
+      </div>
     )
   }
 }
 
 function mapStateToProps({ comments }, props) {
-  const { cid }= props.match.params
+  const { id }= props.match.params
   return {
     comments,
-    cid,
+    id,
   }
 }
 export default connect(mapStateToProps)(EditComment)

@@ -53,7 +53,6 @@ class EditPost extends Component {
           <label>
             Body:
             <textarea
-              placeholder='body...'
               value={ body }
               onChange={ (e)=> this.handleChange(e) }/>
             </label>

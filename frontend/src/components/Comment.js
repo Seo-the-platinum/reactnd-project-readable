@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 class Comment extends Component {
   render() {
@@ -8,6 +9,13 @@ class Comment extends Component {
     const date= new Date(time)
     return (
       <div>
+      <header>
+        <Link to={`/editcomment/${id}`}>
+          <button>
+            Edit comment
+          </button>
+        </Link>
+      </header>
         <h3>
           Author: { comments[id].author}
         </h3>

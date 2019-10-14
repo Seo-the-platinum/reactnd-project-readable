@@ -1,9 +1,27 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Comment from './Comment'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
+import { handleDeletePost } from '../actions/posts'
+
 
 class PostView extends Component {
+
+  state={
+    redirect: false,
+  }
+
+  handleDelete=(e)=> {
+    e.preventDefault()
+    const { dispatch, pid }= this.props
+    dispatch(handleDeletePost(pid))
+    .then(()=> {
+      this.setState(currState=> ({
+        currState,
+        redirect: true,
+      }))
+    })
+  }
   render() {
     const { posts, pid, index, comments }= this.props
     const time= posts[index].timestamp
@@ -13,6 +31,10 @@ class PostView extends Component {
         comments[c].parentId === pid
       )
     })
+
+    if(this.state.redirect) {
+      return <Redirect to='/'/>
+    }
     return (
       <div >
       <header>
@@ -36,6 +58,9 @@ class PostView extends Component {
             Edit Post
           </button>
         </Link>
+        <button onClick={(e)=> this.handleDelete(e)}>
+          Delete
+        </button>
       </header>
       <h3> Author: {posts[index].author}</h3>
       <h3> Date: { `${date}` }</h3>
