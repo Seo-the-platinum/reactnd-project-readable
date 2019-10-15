@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import Comment from './Comment'
 import { Link, Redirect } from 'react-router-dom'
 import { handleDeletePost } from '../actions/posts'
+import { handleParentDeleted } from '../actions/comments'
 
 
 class PostView extends Component {
@@ -13,8 +14,11 @@ class PostView extends Component {
 
   handleDelete=(e)=> {
     e.preventDefault()
-    const { dispatch, pid }= this.props
+    const { dispatch, pid, posts }= this.props
+    const post= posts[pid]
+    
     dispatch(handleDeletePost(pid))
+    dispatch(handleParentDeleted({post}))
     .then(()=> {
       this.setState(currState=> ({
         currState,

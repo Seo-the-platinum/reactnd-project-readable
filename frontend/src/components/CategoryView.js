@@ -9,9 +9,8 @@ class CategoryView extends Component {
 
 
     const postIndexes= Object.keys(posts).filter((p)=> {
-      console.log(posts[p].category)
       return (
-        posts[p].category === path
+        posts[p].category === path && posts[p].deleted !== true
       )
     })
 

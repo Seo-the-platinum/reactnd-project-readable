@@ -94,6 +94,7 @@ function vote (token, id, option) {
 }
 
 function disableByParent (token, post) {
+    console.log(post)
     return new Promise((res) => {
         let comments = getData(token)
         const keys = Object.keys(comments)
