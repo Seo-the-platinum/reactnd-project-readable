@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Comment from './Comment'
 import { Link, Redirect } from 'react-router-dom'
-import { handleDeletePost } from '../actions/posts'
+import { handleDeletePost, handleVotePost } from '../actions/posts'
 import { handleParentDeleted } from '../actions/comments'
 
 
@@ -16,7 +16,7 @@ class PostView extends Component {
     e.preventDefault()
     const { dispatch, pid, posts }= this.props
     const post= posts[pid]
-    
+
     dispatch(handleDeletePost(pid))
     dispatch(handleParentDeleted({post}))
     .then(()=> {
@@ -26,13 +26,20 @@ class PostView extends Component {
       }))
     })
   }
+
+  handleVote=(e)=> {
+    const option= e.target.value
+    const { dispatch, posts, pid }= this.props
+    const post= posts[pid]
+    dispatch(handleVotePost({post}, option))
+  }
   render() {
     const { posts, pid, index, comments }= this.props
     const time= posts[index].timestamp
     const date= new Date(time)
     const postComments= Object.keys(comments).filter(c=> {
       return (
-        comments[c].parentId === pid
+        comments[c].parentId === pid && comments[c].deleted === false
       )
     })
 
@@ -64,6 +71,16 @@ class PostView extends Component {
         </Link>
         <button onClick={(e)=> this.handleDelete(e)}>
           Delete
+        </button>
+        <button
+          value='upVote'
+          onClick={ (e)=> this.handleVote(e) }>
+          +
+        </button>
+        <button
+          value='downVote'
+          onClick={ (e)=> this.handleVote(e) }>
+          -
         </button>
       </header>
       <h3> Author: {posts[index].author}</h3>

@@ -1,14 +1,21 @@
 import React, { Component } from 'react'
 import Category from './Category'
 import { connect } from 'react-redux';
+import styled, { css } from 'styled-components'
+
+const Container= styled.div`
+  background: rgb(2, 150, 156);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
 
 class Home extends Component {
 
   render() {
     const { categories } = this.props
     return (
-      <div>
-
+      <Container>
       { Object.keys(categories).map((category)=> {
         return(
           <Category
@@ -19,7 +26,7 @@ class Home extends Component {
         )
       })
      }
-      </div>
+      </Container>
     )
   }
 }

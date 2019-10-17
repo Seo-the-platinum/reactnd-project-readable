@@ -9,6 +9,10 @@ import EditPost from './components/EditPost'
 import EditComment from './components/EditComment'
 import handleInitialData from './actions/shared'
 import { connect } from 'react-redux'
+import styled, { css } from 'styled-components'
+import NavBar from './components/NavBar'
+
+
 
 class App extends Component {
 
@@ -29,7 +33,8 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <Route path='/' exact component={ Home } />
+          <Route path='/' component={ NavBar } />
+          <Route exact path='/' component={ Home } />
           <Route path='/categoryview/:path' component={ CategoryView } />
           <Route path='/postview/:pid' component={ PostView } />
           <Route path='/add/:pathname' component={ AddorCreate } />

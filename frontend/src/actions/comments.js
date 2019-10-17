@@ -2,9 +2,11 @@ export const RECEIVE_COMMENTS = 'RECEIVE_COMMENTS'
 export const ADD_COMMENT = 'ADD_COMMENT'
 export const EDIT_COMMENT= 'EDIT_COMMENT'
 export const DELETE_COMMENT= 'DELETE_COMMENT'
+export const VOTE_COMMENT= 'VOTE_COMMENT'
 
 const commentModule= require('../api-server/comments')
-const { add, edit, disableByParent, disable }= commentModule
+const { add, edit, disableByParent, disable, vote }= commentModule
+
 export function receiveComments(comments) {
   return {
     type: RECEIVE_COMMENTS,
@@ -29,6 +31,13 @@ function editComment(comment) {
 function deleteComment(comment) {
   return {
     type: DELETE_COMMENT,
+    comment,
+  }
+}
+
+function voteComment(comment) {
+  return {
+    type: VOTE_COMMENT,
     comment,
   }
 }
@@ -62,5 +71,14 @@ export function handleDeleteComment ({comment}) {
 export function handleParentDeleted({post}) {
   return dispatch => {
     return disableByParent(undefined, post)
+  }
+}
+
+export function handleCommentVote({comment}, option) {
+  return dispatch => {
+    return vote (undefined, comment.id, option)
+    .then((comment)=> {
+      dispatch(voteComment(comment))
+    })
   }
 }
