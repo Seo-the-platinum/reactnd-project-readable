@@ -31,7 +31,7 @@ const Button= styled.button`
   color: white;
 `
 
-const Header= styled.div`
+const Header= styled.h1`
   color: white;
   width: 15%;
   text-align: center;

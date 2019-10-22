@@ -2,11 +2,37 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Post from './Post'
 import { Link } from 'react-router-dom'
+import styled, { css } from 'styled-components'
 
+const Container= styled.div`
+  background: rgb(2, 150, 156);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+`
+const Header= styled.h1`
+  color: white;
+`
+
+const Button= styled.button`
+  border: none;
+  padding: 0;
+  background: 0;
+  color: white;
+`
+const PostContainer= styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
 class CategoryView extends Component {
+
+  capitaliseCategory=(path)=> {
+    return path.charAt(0).toUpperCase() + path.slice(1)
+  }
   render() {
     const { path, posts }= this.props
-
 
     const postIndexes= Object.keys(posts).filter((p)=> {
       return (
@@ -15,30 +41,30 @@ class CategoryView extends Component {
     })
 
     return (
-      <div>
-        <header>
-          { path }
-        </header>
-        <button>
+      <Container>
+        <Header>
+          { this.capitaliseCategory(path) }
+        </Header>
+        <Button>
           Filter Posts
-        </button>
+        </Button>
         <div>
           { postIndexes.map((index)=> {
             const postId= posts[index].id
              return (
-               <div key={postId}>
+               <PostContainer key={postId}>
                 <Post key={postId} data={posts[index]}/>
                 <Link to={{
                   pathname: `/postview/${posts[index].id}`,
                   state: { index: index}}
                   }>
-                <button>View Post</button>
+                <Button>View Post</Button>
                 </Link>
-               </div>
+               </PostContainer>
              )
            })}
         </div>
-      </div>
+      </Container>
     )
   }
 }

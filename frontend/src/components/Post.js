@@ -1,16 +1,20 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import styled, { css } from 'styled-components'
+
+const PostTitle= styled.h3`
+  color: white;
+`
 
 class Post extends Component {
   render() {
 
-    const { posts, data }= this.props
-    console.log(posts, data)
+    const { data }= this.props
       return (
       <div>
-        <p>
+        <PostTitle>
           { data.title}
-        </p>
+        </PostTitle>
       </div>
     )
   }

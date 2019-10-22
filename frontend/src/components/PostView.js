@@ -4,8 +4,14 @@ import Comment from './Comment'
 import { Link, Redirect } from 'react-router-dom'
 import { handleDeletePost, handleVotePost } from '../actions/posts'
 import { handleParentDeleted } from '../actions/comments'
+import styled, { css } from 'styled-components'
 
-
+const Container= styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgb(2, 150, 156);
+`
 class PostView extends Component {
 
   state={
@@ -47,7 +53,7 @@ class PostView extends Component {
       return <Redirect to='/'/>
     }
     return (
-      <div >
+      <Container>
       <header>
         <h2>
         {posts[index].title}
@@ -94,7 +100,7 @@ class PostView extends Component {
         />
         })}
       </div>
-      </div>
+      </Container>
     )
   }
 }
