@@ -10,7 +10,61 @@ const Container= styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  border: solid white 1px;
+  border-radius: 15px;
+`
+
+const Header= styled.header`
+  display: flex;
+  justify-contetn: center;
+  flex-direction: column;
+`
+const Button= styled.button`
+  border: none;
+  padding: 0;
+  background: 0;
+  color: white;
+  font-size: 18px;
+  margin: 5px;
+`
+const StyledLink= styled(Link)`
   background: rgb(2, 150, 156);
+  color: white;
+  margin: 1px;
+  text-decoration: none;
+`
+const LinkSection= styled.div`
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+`
+const PostTitle= styled.h2`
+  color: white;
+`
+
+const H3= styled.h3`
+  color: white;
+`
+const P= styled.p`
+  border: solid 2px white;
+  box-shadow: 3px 3px #023133;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  width: 50%;
+  color: white;
+  flex:1;
+  padding: 5px;
+`
+const Comments= styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
+const Body= styled.div`
+  display: flex;
+  justify-content: space-around;
+  width: 60%;
 `
 class PostView extends Component {
 
@@ -38,6 +92,12 @@ class PostView extends Component {
     const { dispatch, posts, pid }= this.props
     const post= posts[pid]
     dispatch(handleVotePost({post}, option))
+    .then(()=> {
+      this.setState(currState=> ({
+        currState,
+        redirect: true,
+      }))
+    })
   }
   render() {
     const { posts, pid, index, comments }= this.props
@@ -54,52 +114,52 @@ class PostView extends Component {
     }
     return (
       <Container>
-      <header>
-        <h2>
-        {posts[index].title}
-        </h2>
-        <h3>
+        <PostTitle>
+          {posts[index].title}
+        </PostTitle>
+      <Header>
+        <H3> Author: {posts[index].author}</H3>
+        <H3> Date: { `${date}` }</H3>
+        <H3>
         Score: {posts[index].voteScore}
-        </h3>
-        <Link to={{
+        </H3>
+      </Header>
+      <LinkSection>
+        <StyledLink to={{
            pathname: `/addcomment/${ pid }`,
            state: {index: index},
          }}
           >
-        <button>
           Add Comment
-        </button>
-        </Link>
-        <Link to={`/edit/${ pid }`}>
-          <button>
-            Edit Post
-          </button>
-        </Link>
-        <button onClick={(e)=> this.handleDelete(e)}>
+        </StyledLink>
+        <StyledLink to={`/edit/${ pid }`}>
+          Edit Post
+        </StyledLink>
+        <Button onClick={(e)=> this.handleDelete(e)}>
           Delete
-        </button>
-        <button
+        </Button>
+      </LinkSection>
+      <Body>
+        <P>{posts[index].body}</P>
+        <Button
           value='upVote'
           onClick={ (e)=> this.handleVote(e) }>
           +
-        </button>
-        <button
+        </Button>
+        <Button
           value='downVote'
           onClick={ (e)=> this.handleVote(e) }>
           -
-        </button>
-      </header>
-      <h3> Author: {posts[index].author}</h3>
-      <h3> Date: { `${date}` }</h3>
-      <p>{posts[index].body}</p>
-      <div>
+        </Button>
+      </Body>
+      <Comments>
         { postComments.map(comment=> {
           return <Comment
             key={ comments[comment].id }
             id={ comments[comment].id}
         />
         })}
-      </div>
+      </Comments>
       </Container>
     )
   }

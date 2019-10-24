@@ -9,10 +9,14 @@ import EditPost from './components/EditPost'
 import EditComment from './components/EditComment'
 import handleInitialData from './actions/shared'
 import { connect } from 'react-redux'
-import styled, { css } from 'styled-components'
+import styled, { css, createGlobalStyle } from 'styled-components'
 import NavBar from './components/NavBar'
 
-
+const GlobalStyle= createGlobalStyle`
+  body,html {
+    height: 100;
+  }
+`
 
 class App extends Component {
 
@@ -41,7 +45,7 @@ class App extends Component {
           <Route path='/addcomment/:pid' component={ AddComment } />
           <Route path='/edit/:pid' component={ EditPost }/>
           <Route path='/editcomment/:id' component={ EditComment } />
-        </div>
+          </div>
       </Router>
     )
   }

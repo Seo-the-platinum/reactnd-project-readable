@@ -4,12 +4,12 @@ import Post from './Post'
 import { Link } from 'react-router-dom'
 import styled, { css } from 'styled-components'
 
+
 const Container= styled.div`
   background: rgb(2, 150, 156);
   display: flex;
   flex-direction: column;
   align-items: center;
-
 `
 const Header= styled.h1`
   color: white;
@@ -21,10 +21,23 @@ const Button= styled.button`
   background: 0;
   color: white;
 `
+
+const PostList= styled.div`
+  display: flex;
+  width: 100%;
+  margin-top: 10px;
+  flex-direction: column;
+  align-items: center;
+`
 const PostContainer= styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  border: solid 2px white;
+  border-radius: 15px;
+  box-shadow: 3px 3px #023133;
+  width: 80%;
+  margin-top: 20px;
 `
 class CategoryView extends Component {
 
@@ -48,7 +61,7 @@ class CategoryView extends Component {
         <Button>
           Filter Posts
         </Button>
-        <div>
+        <PostList>
           { postIndexes.map((index)=> {
             const postId= posts[index].id
              return (
@@ -63,7 +76,7 @@ class CategoryView extends Component {
                </PostContainer>
              )
            })}
-        </div>
+        </PostList>
       </Container>
     )
   }

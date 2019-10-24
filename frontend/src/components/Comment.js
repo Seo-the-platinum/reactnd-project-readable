@@ -2,7 +2,17 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link, Redirect } from 'react-router-dom'
 import { handleDeleteComment, handleCommentVote } from '../actions/comments'
+import styled, { css } from 'styled-components'
 
+const Container= styled.div`
+  align-items: center;
+  border: solid 2px white;
+  border-radius: 15px;
+  box-shadow: 3px 3px #023133;
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+`
 class Comment extends Component {
 
   handleDelete=()=> {
@@ -23,7 +33,7 @@ class Comment extends Component {
     const date= new Date(time)
 
     return (
-      <div>
+      <Container>
       <header>
         <Link to={`/editcomment/${id}`}>
           <button>
@@ -53,7 +63,7 @@ class Comment extends Component {
         <p>
           { comments[id].body }
         </p>
-      </div>
+      </Container>
     )
   }
 }

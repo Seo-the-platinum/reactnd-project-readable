@@ -11,17 +11,27 @@ const Container= styled.div`
   justify-content: center;
   align-items: center;
   width: 80%;
+  margin-top: 5px;
   margin-bottom: 5px;
   background: rgb(2, 150, 156);
   max-height: 33%;
+  border: solid 2px white;
+  border-radius: 15px;
+  box-shadow: 3px 3px #023133;
 
 `
-
+const LinkDiv= styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: flex-start;
+  margin-left: 10px;
+`
 const ButtonContainer= styled.div`
   display: flex;
-  justify-content: space-around;
   width: 100%;
   margin: 5px;
+  justify-content: space-around;
 `
 
 const Button= styled.button`
@@ -37,7 +47,7 @@ const Header= styled.h1`
   text-align: center;
   font-size: 18px;
   background: rgb(2, 150, 156);
-  margin-top: 5px;
+  margin-top: 10px;
 `
 const StyledLink= styled(Link)`
   background: rgb(2, 150, 156);
@@ -84,10 +94,12 @@ class Category extends Component {
         <Header>
           { this.capitaliseCategory(name) }
         </Header>
-        <ButtonContainer>
+        <LinkDiv>
           <Button onClick={ this.toggle }>
           { byScore ? 'Filter by Time' : 'Filter by Score' }
           </Button>
+        </LinkDiv>
+        <ButtonContainer>
           <StyledLink to={`/categoryview/${this.props.path}`}>
               View Category
           </StyledLink>

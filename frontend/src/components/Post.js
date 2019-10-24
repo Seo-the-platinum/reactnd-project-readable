@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import styled, { css } from 'styled-components'
 
-const PostTitle= styled.h3`
+const PostTitle= styled.h4`
   color: white;
 `
 
