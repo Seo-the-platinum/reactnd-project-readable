@@ -13,7 +13,42 @@ const Container= styled.div`
   flex-direction: column;
   margin-top: 10px;
 `
+const StyledLink= styled(Link)`
+  color: white;
+  margin: 10px;
+  padding: none;
+  text-decoration: none;
+`
+
+const Button= styled.button`
+  border: none;
+  padding: 0;
+  background: 0;
+  color: white;
+  font-size: 18px;
+  margin: 5px;
+`
+
+const H3= styled.h3`
+  color: white;
+`
+
+const P= styled.p`
+  border: solid 2px white;
+  box-shadow: 3px 3px #023133;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  width: 50%;
+  color: white;
+  flex:1;
+  padding: 5px;
+`
 class Comment extends Component {
+
+  state={
+    redirect: false,
+  }
 
   handleDelete=()=> {
     const { dispatch, comments, id }= this.props
@@ -26,43 +61,51 @@ class Comment extends Component {
     const { dispatch, comments, id }= this.props
     const comment= comments[id]
     dispatch(handleCommentVote({comment}, option))
+    .then(()=> {
+      this.setState(currState => ({
+        redirect: true,
+      }))
+    })
   }
   render() {
     const { comments, id }= this.props
     const time= comments[id].timestamp
     const date= new Date(time)
-
+  if (this.state.redirect) {
+    return <Redirect to='/'/>
+  }
     return (
       <Container>
       <header>
-        <Link to={`/editcomment/${id}`}>
-          <button>
+        <StyledLink to={`/editcomment/${id}`}>
             Edit comment
-          </button>
-        </Link>
-        <button onClick={ this.handleDelete }>
+        </StyledLink>
+        <Button onClick={ this.handleDelete }>
           Delete comment
-        </button>
-        <button
+        </Button>
+        <Button
           value='upVote'
           onClick={(e)=> this.handleVote(e) }>
           +
-        </button>
-        <button
+        </Button>
+        <Button
           value='downVote'
           onClick={(e)=> this.handleVote(e) }>
           -
-        </button>
+        </Button>
       </header>
-        <h3>
+        <H3>
           Author: { comments[id].author}
-        </h3>
-        <p>
+        </H3>
+        <P>
         Date: {`${date}`}
-        </p>
-        <p>
+        </P>
+        <P>
           { comments[id].body }
-        </p>
+        </P>
+        <P>
+          { `Vote Score: ${comments[id].voteScore}` }
+        </P>
       </Container>
     )
   }

@@ -13,8 +13,9 @@ import styled, { css, createGlobalStyle } from 'styled-components'
 import NavBar from './components/NavBar'
 
 const GlobalStyle= createGlobalStyle`
-  body,html {
-    height: 100;
+  html, body {
+    height: 100%;
+    background: rgb(2, 150, 156);
   }
 `
 
@@ -35,6 +36,7 @@ class App extends Component {
   render() {
 
     return (
+
       <Router>
         <div>
           <Route path='/' component={ NavBar } />

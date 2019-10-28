@@ -11,13 +11,15 @@ import styled, { css, createGlobalStyle } from 'styled-components'
 
 const GlobalStyle= createGlobalStyle`
   html, body {
-    height: 100%;
+    min-height: 100%;
     background: rgb(2, 150, 156);
+    padding: 0;
+    margin:0;
   }
 `
 const store= createStore(reducer, middleware)
 
-ReactDOM.render(<Provider store={store}><GlobalStyle/><App /></Provider>, document.getElementById('root'));
+ReactDOM.render(<><Provider store={store}><App /></Provider><GlobalStyle /></>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

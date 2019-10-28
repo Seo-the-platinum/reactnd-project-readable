@@ -2,7 +2,37 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { handleAddPost } from '../actions/posts'
 import { Redirect } from 'react-router-dom'
+import styled, { css } from 'styled-components'
 
+const Container= styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: solid white 1px;
+  border-radius: 15px;
+`
+
+const Header= styled.h2`
+  color: white;
+  display: flex;
+  justify-content: center;
+`
+
+const Form= styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  border: solid 1px white;
+  border-radius: 15px;
+  padding: 20px;
+`
+const Label= styled.label`
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+`
 class AddorCreate extends Component {
   state= {
     p: {
@@ -102,12 +132,12 @@ class AddorCreate extends Component {
       return <Redirect to='/'/>
     }
     return (
-      <div>
-        <header>
+      <Container>
+        <Header>
         Add post to { pathname } category
-        </header>
-        <form onSubmit={ (e)=> this.handleSubmit(e) }>
-          <label>
+        </Header>
+        <Form onSubmit={ (e)=> this.handleSubmit(e) }>
+          <Label>
           Post title
           <input
             type='text'
@@ -115,8 +145,8 @@ class AddorCreate extends Component {
             value={ title }
             onChange={ (e)=>this.handleChangeTitle(e) }
           />
-          </label>
-          <label>
+          </Label>
+          <Label>
             Post body
             <textarea
               type='text'
@@ -124,8 +154,8 @@ class AddorCreate extends Component {
               value={ body }
               onChange={ (e)=> this.handleChangeBody(e) }
             />
-          </label>
-          <label>
+          </Label>
+          <Label>
             Author
             <input
               type='text'
@@ -133,15 +163,15 @@ class AddorCreate extends Component {
               value={ author }
               onChange={ (e)=> this.handleChangeAuthor(e) }
             />
-          </label>
-          <label>
+          </Label>
+          <Label>
             <input
               type='submit'
               value='submit'
             />
-          </label>
-        </form>
-      </div>
+          </Label>
+        </Form>
+      </Container>
     )
   }
 }
