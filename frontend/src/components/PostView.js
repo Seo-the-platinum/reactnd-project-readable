@@ -4,7 +4,7 @@ import Comment from './Comment'
 import { Link, Redirect } from 'react-router-dom'
 import { handleDeletePost, handleVotePost } from '../actions/posts'
 import { handleParentDeleted } from '../actions/comments'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
 const Container= styled.div`
   display: flex;

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { handleAddComment } from '../actions/comments'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
 const Container= styled.div`
   display: flex;

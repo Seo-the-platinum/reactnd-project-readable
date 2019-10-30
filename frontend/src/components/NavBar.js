@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
-import styled, { css} from 'styled-components'
+import styled from 'styled-components'
 
 const Container= styled.div`
   background: rgb(15, 212, 136);
