@@ -2,8 +2,43 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { handleAddComment } from '../actions/comments'
+import styled, { css } from 'styled-components'
 
-
+const Container= styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
+const Form= styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  border: solid 1px white;
+  border-radius: 15px;
+  padding: 20px;
+`
+const Label= styled.label`
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+`
+const Textarea= styled.textarea`
+  display: flex;
+  margin: 5px;
+`
+const Input= styled.input`
+  color: white;
+  display: flex;
+  margin: 5px;
+  padding: 0;
+  background: none;
+  border: none;
+`
+const Header= styled.h2`
+  color: white;
+`
 class AddComment extends Component {
   state= {
     comment:{
@@ -91,35 +126,35 @@ class AddComment extends Component {
       return <Redirect to='/'/>
     }
     return (
-      <div>
-      { posts[pid].title }
-        <form  onSubmit={ (e)=>this.handleSubmit(e) }>
-          <label>
+      <Container>
+      <Header>{ posts[pid].title }</Header>
+        <Form  onSubmit={ (e)=>this.handleSubmit(e) }>
+          <Label>
           Comment Body
-            <textarea
+            <Textarea
               type='text'
               placeholder='comment'
               value={ body }
               onChange={(e)=> this.handleChange(e) }
               />
-          </label>
-          <label>
+          </Label>
+          <Label>
             Comment author
-            <input
+            <Textarea
               type='text'
               placeholder='comment'
               value={ author }
               onChange={(e)=> this.handleChangeAuthor(e)}
             />
-          </label>
-          <label>
-            <input
+          </Label>
+          <Label>
+            <Input
               type='submit'
-              value='submit'
+              value='Submit'
             />
-          </label>
-        </form>
-      </div>
+          </Label>
+        </Form>
+      </Container>
     )
   }
 }

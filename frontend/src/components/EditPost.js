@@ -2,7 +2,38 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { handleEditPost } from '../actions/posts'
 import { Redirect } from 'react-router-dom'
+import styled, { css } from 'styled-components'
 
+const Container= styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
+const Form= styled.form`
+  display: flex;
+  flex-direction: column;
+  border: solid 1px white;
+  border-radius: 15px;
+  align-items: center;
+`
+
+const Label= styled.label`
+  display: flex;
+  padding: 5px;
+  color: white;
+`
+const Textarea= styled.textarea`
+  display: flex;
+  margin: 5px;
+`
+const Input= styled.input`
+  color: white;
+  display: flex;
+  margin: 5px;
+  padding: 0;
+  background: none;
+  border: none;
+`
 class EditPost extends Component {
   state={
     post:{},
@@ -48,23 +79,22 @@ class EditPost extends Component {
       return <Redirect to='/'/>
     }
     return (
-      <div>
-        <form onSubmit={(e)=> this.handleSubmit(e)}>
-          <label>
+      <Container>
+        <Form onSubmit={(e)=> this.handleSubmit(e)}>
+          <Label>
             Body:
-            <textarea
+            <Textarea
               value={ body }
               onChange={ (e)=> this.handleChange(e) }/>
-            </label>
-            <label>
-              Submit
-              <input
+            </Label>
+            <Label>
+              <Input
                 type='submit'
-                value='submit'
+                value='Submit'
               />
-            </label>
-        </form>
-      </div>
+            </Label>
+        </Form>
+      </Container>
     )
   }
 }
