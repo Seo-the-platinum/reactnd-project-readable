@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/reactnd-project-readable/frontend/static/css/main.34de6062.chunk.css",
+    "main.js": "/reactnd-project-readable/frontend/static/js/main.63325c77.chunk.js",
+    "main.js.map": "/reactnd-project-readable/frontend/static/js/main.63325c77.chunk.js.map",
+    "runtime~main.js": "/reactnd-project-readable/frontend/static/js/runtime~main.5c2170f3.js",
+    "runtime~main.js.map": "/reactnd-project-readable/frontend/static/js/runtime~main.5c2170f3.js.map",
+    "static/js/2.03dc0dca.chunk.js": "/reactnd-project-readable/frontend/static/js/2.03dc0dca.chunk.js",
+    "static/js/2.03dc0dca.chunk.js.map": "/reactnd-project-readable/frontend/static/js/2.03dc0dca.chunk.js.map",
+    "index.html": "/reactnd-project-readable/frontend/index.html",
+    "precache-manifest.a1b7ef0089abe3d7a6895bb51b6b3bef.js": "/reactnd-project-readable/frontend/precache-manifest.a1b7ef0089abe3d7a6895bb51b6b3bef.js",
+    "service-worker.js": "/reactnd-project-readable/frontend/service-worker.js",
+    "static/css/main.34de6062.chunk.css.map": "/reactnd-project-readable/frontend/static/css/main.34de6062.chunk.css.map"
+  }
+}
